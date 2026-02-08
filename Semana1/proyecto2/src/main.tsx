@@ -9,4 +9,4 @@ createRoot(document.getElementById('root')!).render(
   </StrictMode>,
 )
 
-//npm create vite@latest proyecto1
+//Decisiones importantes, para no romper el proyecto tocando variables globales

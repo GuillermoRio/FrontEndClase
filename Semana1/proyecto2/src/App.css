@@ -1,0 +1,40 @@
+body {
+  margin-left: 700px;
+  height: 100vh;
+}
+
+#root {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.calc {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 10px;
+}
+
+.numbers {
+  display: grid;
+  grid-template-columns: repeat(3, 60px);
+  gap: 10px;
+}
+
+.symbols {
+  display: grid;
+  grid-template-rows: repeat(5, 60px);
+  gap: 10px;
+}
+
+.result {
+  display: flex;
+  justify-content: center;
+}
