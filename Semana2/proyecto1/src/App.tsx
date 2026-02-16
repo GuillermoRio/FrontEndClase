@@ -1,24 +1,41 @@
-import { useEffect, useState } from 'react'
-import { api } from './api/api'
+
+import { useEffect, useState } from "react";
 import './App.css'
+import { Character } from "./components/Character";
+import type { CharacterT } from "./types";
+import { api } from "./api/api";
 
 const App = () => {
+  const [characters, setCharacters] = useState<CharacterT[]>([]);
+  const [name, setName] = useState<string>("");
+  const [finalName, setFinalName] = useState<string>("");
 
-  //api.get("/character").then((e)=>console.log(e.data));
-  const [palabra, setpalabra] = useState<string>('')
-  const [count, setCount] = useState<number>(0)
+  useEffect(() => {
+    api
+      .get(`/character/${finalName ? "?name=" + finalName : ""}`)
+      .then((e) => setCharacters(e.data.results));
+  }, [finalName]);
 
-  useEffect(()=>{
-    api.get("/character").then((e)=>console.log(e.data));
-  }, [])//Cada vez que cambie el count o lo que pongas renderiza
   return (
     <>
-      <p>{count}</p>
-      <p>{palabra}</p>
-      <button onClick={()=>{setCount(count+1)}}>Pulsale</button>
-      <input onChange={(e)=>{setpalabra(e.target.value)}}/>
+      <input
+        value={name}
+        onChange={(e) => {
+          setName(e.target.value);
+        }}
+      />
+      <button
+        onClick={() => {
+          setFinalName(name);
+        }}
+      >
+        Search
+      </button>
+      {characters.map((e) => (
+        <Character key={e.id} character={e} />
+      ))}
     </>
-  )
-}
+  );
+};
 
 export default App
